@@ -1,0 +1,1 @@
+export { default as Boilerplate } from './Boilerplate';
