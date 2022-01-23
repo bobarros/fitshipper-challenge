@@ -1,6 +1,9 @@
 // Types
 import type { FC } from "react";
 
+// Shared Components
+import { Auth } from "../components";
+
 /*--------------------*/
 
 // Local Types
@@ -12,10 +15,8 @@ interface IProps {}
 
 const Login: FC<IProps> = () => {
   return (
-    <div className="h-full text-center">
-      <p className="text-4xl mt-32 max-w-md mx-auto">
-        Login Page
-      </p>
+    <div>
+      <Auth />
     </div>
   );
 };
