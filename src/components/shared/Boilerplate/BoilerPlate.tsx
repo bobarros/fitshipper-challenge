@@ -1,3 +1,8 @@
+// Third Parties
+
+// Styles
+import { Wrap, InnerWrap } from "./BoilerPlateStyle";
+
 // Next
 
 // Types
@@ -10,16 +15,16 @@ import type { FC } from "react";
 /*--------------------*/
 
 // Local Types
-interface IProps { }
+interface IProps {}
 
 /**
  * Boilerplate Component
  */
 const Boilerplate: FC<IProps> = () => {
   return (
-    <section>
-
-    </section>
+    <Wrap>
+      <InnerWrap />
+    </Wrap>
   );
 };
 
