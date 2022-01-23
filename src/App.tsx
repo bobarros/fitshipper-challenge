@@ -8,7 +8,7 @@ import { FC, ReactNode } from "react";
 import "./styles/globals.scss";
 
 // Routes
-import { Home } from "./routes";
+import { Home, Login } from "./routes";
 import DefaultLayout from "./layout/DefaultLayout";
 
 // Local Types
@@ -26,6 +26,7 @@ const App: FC<IProps> = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={CustomRender(<Home />)} />
+        <Route path="/login" element={CustomRender(<Login />)} />
       </Routes>
     </BrowserRouter>
   );

@@ -12,8 +12,8 @@ export const FooterWrap = ({ children }: IStandard) => (
   <footer
     className={`
     px-6 py-12 text-center text-base text-center border-t border-solid border-stone-900
-    bg-white text-stone-900
-    dark:text-white dark:bg-stone-900
+    bg-stone-50 text-stone-900
+    dark:text-stone-50 dark:bg-stone-900
     md:text-xl
     2xl:text-2xl
   `}
@@ -23,7 +23,7 @@ export const FooterWrap = ({ children }: IStandard) => (
 );
 
 export const Logo = ({ children }: IStandard) => (
-  <div className="w-20 h-20 bg-white rounded-full mx-auto mb-12">
+  <div className="w-20 h-20 bg-stone-50 rounded-full mx-auto mb-12">
     {children}
   </div>
 );

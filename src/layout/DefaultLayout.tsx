@@ -21,7 +21,7 @@ const DefaultLayout: FC<IProps> = ({ children }) => {
   return (
     <div className={`${dark ? "dark" : "light"} min-h-screen flex flex-col`}>
       <NavBar isCurrentDark={dark} setDark={setDark} />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 bg-slate-50 dark:bg-gray-800">{children}</main>
       <Footer />
     </div>
   );
