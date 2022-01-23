@@ -5,7 +5,7 @@ import type { FC } from "react";
 import { useState } from "react";
 
 // Shared Components
-import { NavBar } from "../components/shared";
+import { NavBar, Footer } from "../components/shared";
 
 /*--------------------*/
 
@@ -22,7 +22,7 @@ const DefaultLayout: FC<IProps> = ({ children }) => {
     <div className={`${dark ? "dark" : "light"} min-h-screen flex flex-col`}>
       <NavBar isCurrentDark={dark} setDark={setDark} />
       <main className="flex-1">{children}</main>
-      <footer>footer</footer>
+      <Footer />
     </div>
   );
 };
