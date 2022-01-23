@@ -5,6 +5,7 @@ import type { FC } from "react";
 import { useState } from "react";
 
 // Shared Components
+import { NavBar } from "../components/shared";
 
 /*--------------------*/
 
@@ -18,9 +19,9 @@ interface IProps {}
 const DefaultLayout: FC<IProps> = ({ children }) => {
   const [dark, setDark] = useState(false);
   return (
-    <div className="min-h-screen flex flex-col">
-      <nav>Navbar</nav>
-      <main className={`${dark ? "dark" : "light"} flex-1`}>{children}</main>
+    <div className={`${dark ? "dark" : "light"} min-h-screen flex flex-col`}>
+      <NavBar isCurrentDark={dark} setDark={setDark} />
+      <main className="flex-1">{children}</main>
       <footer>footer</footer>
     </div>
   );
