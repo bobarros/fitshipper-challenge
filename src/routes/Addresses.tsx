@@ -10,7 +10,7 @@ import type { Session } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 
 // Shared Components
-import { AddressesTable } from "../components";
+import { AddressesTable, NewAddress } from "../components";
 import { SideBar } from "../components/shared";
 
 // Utils
@@ -20,6 +20,7 @@ import { addressesMock } from "../utils/mockServer";
 
 // Local Types
 interface IProps {}
+type Sections = "show" | "create" | "edit";
 
 /**
  * Addresses Component
@@ -27,6 +28,7 @@ interface IProps {}
 
 const Addresses: FC<IProps> = () => {
   const [addresses, setAddresses] = useState<any>([]);
+  const [switchSections, setSwitchSection] = useState<Sections>("show");
 
   // Fetch Data
   useEffect(() => {
@@ -50,12 +52,23 @@ const Addresses: FC<IProps> = () => {
     fetchData();
   }, []);
 
+  const renderTable = () => {
+    switch (switchSections) {
+      case "show":
+        return <AddressesTable addresses={addresses} setSwitchSection={setSwitchSection}/>;
+      case "edit":
+        return <div>Under Construction</div>;
+      case "create":
+        return <NewAddress setSwitchSection={setSwitchSection} />;
+      default:
+        return <AddressesTable addresses={addresses} setSwitchSection={setSwitchSection}/>;
+    }
+  };
+
   return (
     <div className="h-full min-h-full grid grid-cols-8">
       <SideBar />
-      <div className="p-6 col-span-7">
-        <AddressesTable addresses={addresses}/>
-      </div>
+      <div className="p-6 col-span-7">{renderTable()}</div>
     </div>
   );
 };

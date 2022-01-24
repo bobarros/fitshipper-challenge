@@ -18,12 +18,13 @@ import { PrimaryButton } from "components/shared";
 // Local Types
 interface IProps {
   addresses: any;
+  setSwitchSection: (section: 'create') => void;
 }
 
 /**
  * AddressesTable Component
  */
-const AddressesTable: FC<IProps> = ({ addresses }) => {
+const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection }) => {
   const data = useMemo(() => addresses, [addresses]);
   const columns = useMemo(() => AddressesColumnSchema, []);
   const tableInstance = useTable({ columns, data }, useSortBy, usePagination);
@@ -31,7 +32,7 @@ const AddressesTable: FC<IProps> = ({ addresses }) => {
     tableInstance;
   return (
     <div>
-      <div className="w-32 mb-8 inline-block float-right">
+      <div className="w-32 mb-8 inline-block float-right" onClick={() => setSwitchSection('create')}>
         <PrimaryButton>Create +</PrimaryButton>
       </div>
       <table
