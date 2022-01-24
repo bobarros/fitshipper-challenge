@@ -10,6 +10,8 @@ import type { Session } from "@supabase/supabase-js";
 import { useState, useEffect } from "react";
 
 // Shared Components
+import { AddressesTable } from "../components";
+import { SideBar } from "../components/shared";
 
 // Utils
 import { addressesMock } from "../utils/mockServer";
@@ -17,9 +19,7 @@ import { addressesMock } from "../utils/mockServer";
 /*--------------------*/
 
 // Local Types
-interface IProps {
-  session: Session;
-}
+interface IProps {}
 
 /**
  * Addresses Component
@@ -51,9 +51,10 @@ const Addresses: FC<IProps> = () => {
   }, []);
 
   return (
-    <div className="">
-      <div>
-        <div>Welcome, John!</div>
+    <div className="h-full min-h-full grid grid-cols-8">
+      <SideBar />
+      <div className="p-6 col-span-7">
+        <AddressesTable addresses={addresses}/>
       </div>
     </div>
   );

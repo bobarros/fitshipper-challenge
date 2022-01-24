@@ -30,7 +30,7 @@ const Settings: FC<IProps> = () => {
   return (
     <div className="h-full min-h-full grid grid-cols-8">
       <SideBar />
-      <div className="pt-6 pl-8 col-span-7">
+      <div className="p-6 col-span-7">
         <p className="text-4xl max-w-md text-stone-900 dark:text-stone-50">Settings</p>
         <div className="w-32 mt-8 cursor-pointer" onClick={() => authSignout()}>
           <PrimaryButton>Logout</PrimaryButton>
