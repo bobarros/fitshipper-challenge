@@ -20,7 +20,7 @@ interface IProps {
  */
 
 const DefaultLayout: FC<IProps> = ({ children, session }) => {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(true); // pay attention to dark mode being the default one
   return (
     <div
       className={`${dark ? "dark" : "light"} min-h-screen grid`}
