@@ -34,6 +34,7 @@ const AuthForm: FC<IProps> = ({ type }) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
   const [loading, setLoading] = useState(false);
   const [errorForm, setErrorForm] = useState<string | null>(null);
@@ -47,8 +48,13 @@ const AuthForm: FC<IProps> = ({ type }) => {
     const { error } = isLogin
       ? await supabase.auth.signIn(currentUser)
       : await supabase.auth.signUp(currentUser);
-    if (error) setErrorForm(error.message);
-    if (!error) navigate(isLogin ? "/dashboard" : "/login");
+    if (error) {
+      setErrorForm(error.message);
+      setValue("password", "");
+    }
+    if (!error) {
+      navigate(isLogin ? "/dashboard" : "/login");
+    }
     setLoading(false);
   };
 
@@ -64,11 +70,11 @@ const AuthForm: FC<IProps> = ({ type }) => {
         <PrimaryButton disabled={loading} filled>
           {isLogin ? "Login" : "Sign up"}
         </PrimaryButton>
-        {errorForm && <ErrorWarning>Something went wrong!</ErrorWarning>}
+        {errorForm && <ErrorWarning>{errorForm}</ErrorWarning>}
       </form>
       <div className="text-center mt-6 text-stone-900 dark:text-stone-50">
         <p>
-          Not a user? <Link to="/signup">Sign Up</Link>
+          Not a user? <Link to="/signup">Sign Up here!</Link>
         </p>
         <p className="mt-2">
           <Link to="/">Forgot Password?</Link>

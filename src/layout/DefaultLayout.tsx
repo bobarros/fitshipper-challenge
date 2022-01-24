@@ -22,9 +22,12 @@ interface IProps {
 const DefaultLayout: FC<IProps> = ({ children, session }) => {
   const [dark, setDark] = useState(false);
   return (
-    <div className={`${dark ? "dark" : "light"} min-h-screen flex flex-col`}>
+    <div
+      className={`${dark ? "dark" : "light"} min-h-screen grid`}
+      style={{ gridTemplateRows: "max-content 1fr max-content" }}
+    >
       <NavBar isCurrentDark={dark} setDark={setDark} session={session} />
-      <main className="flex-1 bg-slate-50 dark:bg-gray-800">{children}</main>
+      <main className="bg-slate-50 dark:bg-gray-800">{children}</main>
       <Footer />
     </div>
   );
