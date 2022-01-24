@@ -3,7 +3,7 @@ import { supabase } from "../../auth/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 // Syles
-import { Input, Button, ErrorWarning } from "./AuthFormStyle";
+import { Input, ErrorWarning } from "./AuthFormStyle";
 
 // Types
 import type { FC } from "react";
@@ -13,6 +13,9 @@ import type { FieldValues } from "react-hook-form";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+
+// Shared Components
+import { PrimaryButton } from "../shared";
 
 /*--------------------*/
 
@@ -58,7 +61,9 @@ const AuthForm: FC<IProps> = ({ type }) => {
         {errors.password && (
           <ErrorWarning>The password is required</ErrorWarning>
         )}
-        <Button loading={loading} text={isLogin ? 'Login' : 'Sign up'} />
+        <PrimaryButton disabled={loading} filled>
+          {isLogin ? "Login" : "Sign up"}
+        </PrimaryButton>
         {errorForm && <ErrorWarning>Something went wrong!</ErrorWarning>}
       </form>
       <div className="text-center mt-6 text-stone-900 dark:text-stone-50">
