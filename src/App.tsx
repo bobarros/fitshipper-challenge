@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import "./styles/globals.scss";
 
 // Routes
-import { LoggedArea, Home, Login } from "./routes";
+import { LoggedArea, Home, Login, CreateUser } from "./routes";
 import DefaultLayout from "./layout/DefaultLayout";
 
 // Local Types
@@ -42,6 +42,7 @@ const App: FC<IProps> = () => {
         <Routes>
           <Route path="/login" element={CustomRender(<Login />)} />
           <Route path="/" element={CustomRender(<Home />)} />
+          <Route path="/signup" element={CustomRender(<CreateUser />)} />
           <Route path="*" element={<div>404 - Not Found</div>} />
         </Routes>
       </BrowserRouter>

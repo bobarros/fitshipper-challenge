@@ -7,6 +7,7 @@ type IStandard = {
   item?: string;
   register?: UseFormRegister<FieldValues>;
   loading?: boolean;
+  text?: string;
 };
 
 /**
@@ -34,12 +35,12 @@ export const Input = ({ item = "", register }: IStandard) => (
   </div>
 );
 
-export const Button = ({ loading }: IStandard) => (
+export const Button = ({ loading, text }: IStandard) => (
   <div className="py-1 px-2 border border-solid border-stone-900 mt-2
   bg-stone-50 text-stone-900
   dark:text-stone-50 dark:bg-stone-800">
     <button type="submit" disabled={loading}>
-      {loading ? <span>Loading</span> : <span>Login</span>}
+      {loading ? <span>Loading</span> : <span>{text}</span>}
     </button>
   </div>
 );

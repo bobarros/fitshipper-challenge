@@ -12,6 +12,7 @@ import type { FieldValues } from "react-hook-form";
 // Hooks
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 /*--------------------*/
 
@@ -40,21 +41,35 @@ const AuthForm: FC<IProps> = ({ type }) => {
       email: email,
       password: password,
     };
-    const { error } = isLogin ? await supabase.auth.signIn(currentUser) : await supabase.auth.signUp(currentUser);
+    const { error } = isLogin
+      ? await supabase.auth.signIn(currentUser)
+      : await supabase.auth.signUp(currentUser);
     if (error) setErrorForm(error.message);
-    if (!error) navigate("/dashboard");
+    if (!error) navigate(isLogin ? "/dashboard" : "/login");
     setLoading(false);
   };
 
   return (
-    <form className="w-64" onSubmit={handleSubmit(handleLogin)}>
-      <Input item="Email" register={register} />
-      {errors.email && <ErrorWarning>The email is required</ErrorWarning>}
-      <Input item="Password" register={register} />
-      {errors.password && <ErrorWarning>The password is required</ErrorWarning>}
-      <Button loading={loading} />
-      {errorForm && <ErrorWarning>Something went wrong!</ErrorWarning>}
-    </form>
+    <div>
+      <form className="w-64" onSubmit={handleSubmit(handleLogin)}>
+        <Input item="Email" register={register} />
+        {errors.email && <ErrorWarning>The email is required</ErrorWarning>}
+        <Input item="Password" register={register} />
+        {errors.password && (
+          <ErrorWarning>The password is required</ErrorWarning>
+        )}
+        <Button loading={loading} text={isLogin ? 'Login' : 'Sign up'} />
+        {errorForm && <ErrorWarning>Something went wrong!</ErrorWarning>}
+      </form>
+      <div className="text-center mt-6 text-stone-900 dark:text-stone-50">
+        <p>
+          Not a user? <Link to="/signup">Sign Up</Link>
+        </p>
+        <p className="mt-2">
+          <Link to="/">Forgot Password?</Link>
+        </p>
+      </div>
+    </div>
   );
 };
 
