@@ -17,6 +17,7 @@ import { FC } from "react";
 // Local Types
 interface IProps {
   children: string;
+  type?: "button" | "submit" | "reset" | undefined;
   filled?: boolean;
   disabled?: boolean;
 }
@@ -24,9 +25,9 @@ interface IProps {
 /**
  * Boilerplate Component
  */
-const Boilerplate: FC<IProps> = ({ children, filled, disabled }) => {
+const Boilerplate: FC<IProps> = ({ children, filled, disabled, type = "submit" }) => {
   return (
-    <Button filled={filled} disabled={disabled}>
+    <Button type={type} filled={filled} disabled={disabled}>
       {children}
     </Button>
   );

@@ -1,13 +1,13 @@
 // Third Parties
 import axios, { AxiosRequestConfig } from "axios";
 
-
 // Types
-import type { FC } from "react";
+import { FC } from "react";
 
 // Hooks
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { PrimaryButton } from "components/shared";
 
 // Shared Components
 
@@ -15,7 +15,7 @@ import { useState } from "react";
 
 // Local Types
 interface IProps {
-  setSwitchSection: (section: 'show') => void;
+  setSwitchSection: (section: "show") => void;
 }
 
 // Local Preps
@@ -25,7 +25,6 @@ interface IProps {
  */
 const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const {
     handleSubmit,
     formState: { errors },
@@ -42,7 +41,7 @@ const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
     axios(options)
       .then(() => {
         setLoading(false);
-        setSuccess(true);
+        setSwitchSection('show');
       })
       .catch((res) => {
         console.log("error", res);
@@ -85,36 +84,32 @@ const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="max-w-xl" onSubmit={handleSubmit(onSubmit)}>
         {content.map((item) => (
-          <label key={item.id} className="block mb-2">
-            {item.label} {item.required && "(Optional)"}
+          <label className="block mb-2 flex">
+            <p className="basis-1/3">
+              {item.label} {!item.required && "(Optional)"}
+            </p>
             <input
-              className="ml-2 p-2 border-solid border-2 border-black"
-              required={errors.email}
+              className={`ml-2 p-2 border-solid border-2 flex-1 ${
+                errors[item.id] ? "border-red-600" : "border-stone-900"
+              }`}
+              required={errors[item.id]}
               type="text"
               placeholder={`Enter your ${item.id}`}
               {...register(item.id, { required: item.required })}
             />
-            {errors.email && <span>Please enter your {item.id}</span>}
           </label>
         ))}
-        <div className="flex">
-          <button type="submit" className="bg-black text-white p-2">
-            Submit
-          </button>
-          <button
-            onClick={() => console.log("navigate back")}
-            type="button"
-            className="bg-white text-black p-2"
-            onClickCapture={() => setSwitchSection('show')}
-          >
-            Cancel
-          </button>
+        <div className="grid grid-cols-2 gap-2">
+          <div onClick={() => setSwitchSection("show")}>
+            <PrimaryButton type="button">Cancel</PrimaryButton>
+          </div>
+          <PrimaryButton type="submit" filled>
+            {loading ? "Saving..." : "Submit"}
+          </PrimaryButton>
         </div>
       </form>
-      {loading && <div>Loading...</div>}
-      {success ? <div>Success!</div> : null}
     </div>
   );
 };
