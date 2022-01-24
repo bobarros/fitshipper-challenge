@@ -7,17 +7,17 @@ import type { FC } from "react";
 interface IProps {}
 
 /**
- * Dashboard Component
+ * LoggedArea Component
  */
 
-const Dashboard: FC<IProps> = () => {
+const LoggedArea: FC<IProps> = () => {
   return (
     <div className="h-full text-center">
       <p className="text-4xl mt-32 max-w-md mx-auto">
-        Welcome to the Dashboard landing page!
+        Welcome to the LoggedArea landing page!
       </p>
     </div>
   );
 };
 
-export default Dashboard;
+export default LoggedArea;
