@@ -4,6 +4,7 @@ type IStandard = {
   children?: ReactChild[] | ReactChild;
   setDark?: (variable: boolean) => void;
   isCurrentDark?: boolean;
+  onClick?: () => void;
 };
 
 /**
@@ -31,8 +32,8 @@ export const AllLinks = ({ children }: IStandard) => (
   <div className="flex items-center">{children}</div>
 );
 
-export const NavLink = ({ children }: IStandard) => (
-  <div className="cursor-pointer ">{children}</div>
+export const NavLink = ({ children, onClick }: IStandard) => (
+  <div onClick={onClick} className="cursor-pointer ">{children}</div>
 );
 
 export const SwitchTheme = ({ setDark, isCurrentDark }: IStandard) => (
@@ -51,4 +52,12 @@ export const Divider = () => (
     dark:bg-stone-50
     w-px h-8 mx-6"
   />
+);
+
+export const Image = ({ children }: IStandard) => (
+  <div className=" w-12 h-12 rounded-full overflow-hidden">{children}</div>
+);
+
+export const ProfileName = ({ children }: IStandard) => (
+  <p className="">{children}</p>
 );

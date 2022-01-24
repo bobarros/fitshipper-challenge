@@ -22,10 +22,10 @@ interface IProps {
 }
 
 /**
- * DashBoard Component
+ * Dashboard Component
  */
 
-const DashBoard: FC<IProps> = () => {
+const Dashboard: FC<IProps> = () => {
   const [addresses, setAddresses] = useState<any>([]);
 
   // Fetch Data
@@ -59,4 +59,4 @@ const DashBoard: FC<IProps> = () => {
   );
 };
 
-export default DashBoard;
+export default Dashboard;

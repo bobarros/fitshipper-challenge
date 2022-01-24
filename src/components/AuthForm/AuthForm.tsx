@@ -1,4 +1,5 @@
 // Third Parties
+import { supabase } from "../../auth/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 // Syles
@@ -19,14 +20,11 @@ interface IProps {
   type: "login" | "signup";
 }
 /**
- * SupaForm Component
+ * AuthForm Component
  */
 
-const SupaForm: FC<IProps> = ({ type }) => {
-  const formConfig = {
-    redirect: type === "login" ? "/" : "/dashboard",
-  };
-
+const AuthForm: FC<IProps> = ({ type }) => {
+  const isLogin = type === "login";
   const navigate = useNavigate();
   const {
     register,
@@ -34,20 +32,17 @@ const SupaForm: FC<IProps> = ({ type }) => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [errorForm, setErrorForm] = useState<string | null>(null);
 
   const handleLogin = async (data: FieldValues) => {
     const { email, password } = data;
-    console.log("Show form data for now:", email, password)
-
-    if(true) {
-      navigate("/");
-    }
-
-    if(false) {
-      // TODO handle when login is not successful
-    }
-
+    const currentUser = {
+      email: email,
+      password: password,
+    };
+    const { error } = isLogin ? await supabase.auth.signIn(currentUser) : await supabase.auth.signUp(currentUser);
+    if (error) setErrorForm(error.message);
+    if (!error) navigate("/dashboard");
     setLoading(false);
   };
 
@@ -58,9 +53,9 @@ const SupaForm: FC<IProps> = ({ type }) => {
       <Input item="Password" register={register} />
       {errors.password && <ErrorWarning>The password is required</ErrorWarning>}
       <Button loading={loading} />
-      {error && <ErrorWarning>Something went wrong! Please, try again.</ErrorWarning>}
+      {errorForm && <ErrorWarning>Something went wrong!</ErrorWarning>}
     </form>
   );
 };
 
-export default SupaForm;
+export default AuthForm;
