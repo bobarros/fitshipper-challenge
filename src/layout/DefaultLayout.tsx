@@ -27,7 +27,7 @@ const DefaultLayout: FC<IProps> = ({ children, session }) => {
       style={{ gridTemplateRows: "max-content 1fr max-content" }}
     >
       <NavBar isCurrentDark={dark} setDark={setDark} session={session} />
-      <main className="bg-slate-50 dark:bg-gray-800">{children}</main>
+      <main className="bg-stone-50 dark:bg-stone-700">{children}</main>
       <Footer />
     </div>
   );

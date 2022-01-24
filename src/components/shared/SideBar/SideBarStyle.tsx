@@ -15,7 +15,7 @@ export const SideBarWrap = ({ children }: IStandard) => (
     md:text-xl
     2xl:text-2xl
     bg-stone-50 text-stone-900
-    dark:bg-stone-900 dark:text-white
+    dark:bg-stone-800 dark:text-white
   `}
   >
     {children}
