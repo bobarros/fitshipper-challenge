@@ -11,7 +11,9 @@ import { useMemo } from "react";
 
 // Component Schema
 import { AddressesColumnSchema } from "./AddressesTableSchemas";
-import { PrimaryButton } from "components/shared";
+
+// Shared Components
+import { PrimaryButton } from "components";
 
 /*--------------------*/
 
@@ -34,6 +36,10 @@ const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection, setSelectedAd
   const handleEditAddress = (address: any) => {
     setSwitchSection('edit');
     setSelectedAddress(address);
+  }
+
+  const openRemoveBox = (address: any) => {
+
   }
 
   return (
@@ -91,7 +97,7 @@ const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection, setSelectedAd
                 })}
                 <td className="border border-solid pl-2 pr-16 border-stone-900 dark:border-stone-50">
                   <span onClick={() => handleEditAddress(row.original) } className="cursor-pointer">Edit</span> /{" "}
-                  <span className="cursor-pointer">Remove</span>
+                  <span onClick={() => openRemoveBox(row.original)} className="cursor-pointer">Remove</span>
                 </td>
               </tr>
             );

@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "auth/supabaseClient";
 
 // Types
-import { PrimaryButton, SideBar } from "components/shared";
 import type { FC } from "react";
+
+// Shared Components
+import { PrimaryButton, SideBar } from "components";
 
 /*--------------------*/
 

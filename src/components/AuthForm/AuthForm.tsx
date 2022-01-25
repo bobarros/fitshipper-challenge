@@ -1,6 +1,6 @@
 // Third Parties
 import { supabase } from "../../auth/supabaseClient";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Syles
 import { Input, ErrorWarning } from "./AuthFormStyle";
@@ -12,10 +12,9 @@ import type { FieldValues } from "react-hook-form";
 // Hooks
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 // Shared Components
-import { PrimaryButton } from "../shared";
+import { PrimaryButton } from "components";
 
 /*--------------------*/
 

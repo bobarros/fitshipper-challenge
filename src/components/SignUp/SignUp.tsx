@@ -5,7 +5,7 @@ import { FormWrap } from "./SignUpStyle";
 import type { FC } from "react";
 
 // Shared Components
-import { AuthForm } from "..";
+import { AuthForm } from "components";
 
 /*--------------------*/
 

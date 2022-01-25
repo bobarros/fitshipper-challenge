@@ -9,8 +9,7 @@ import type { AxiosRequestConfig } from "axios";
 import { useState, useEffect } from "react";
 
 // Shared Components
-import { AddressesTable, NewAddress, EditAddress } from "../components";
-import { SideBar } from "../components/shared";
+import { AddressesTable, NewAddress, EditAddress, SideBar } from "components";
 
 /*--------------------*/
 

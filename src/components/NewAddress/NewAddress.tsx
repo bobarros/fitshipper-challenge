@@ -7,9 +7,9 @@ import { FC } from "react";
 // Hooks
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { PrimaryButton } from "components/shared";
 
 // Shared Components
+import { PrimaryButton } from "components";
 
 /*--------------------*/
 

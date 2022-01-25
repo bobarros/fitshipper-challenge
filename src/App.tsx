@@ -2,17 +2,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { supabase } from "./auth/supabaseClient";
 
+// Styles
+import "./styles/globals.scss";
+
 // Types
-import { FC, ReactNode } from "react";
+import type { FC, ReactNode } from "react";
 
 // Hooks
 import { useState, useEffect } from "react";
 
-// Styles
-import "./styles/globals.scss";
 
 // Routes
 import { LoggedArea, Home, Login, CreateUser, Settings, Addresses } from "./routes";
+
+// Shared Components
 import DefaultLayout from "./layout/DefaultLayout";
 
 // Local Types

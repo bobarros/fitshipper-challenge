@@ -8,7 +8,7 @@ import type { FC } from "react";
 import { FooterWrap, Logo, Disclaimer } from "./FooterStyle";
 
 // Shared Components
-import { LogoBob } from "..";
+import { LogoBob } from "components";
 
 /*--------------------*/
 

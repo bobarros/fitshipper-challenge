@@ -2,7 +2,7 @@
 import type { FC } from "react";
 
 // Shared Components
-import { SignUp } from "../components";
+import { SignUp } from "components";
 
 /*--------------------*/
 

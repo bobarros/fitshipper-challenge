@@ -1,16 +1,8 @@
-// Third Parties
-
 // Styles
 import { Wrap, InnerWrap, Background } from "./ConfirmBoxStyle";
 
-// Next
-
 // Types
 import type { FC } from "react";
-
-// Hooks
-
-// Shared Components
 
 /*--------------------*/
 

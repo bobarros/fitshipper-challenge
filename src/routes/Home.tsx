@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 // Types
 import type { FC } from "react";
-import { Session } from "@supabase/supabase-js";
+import type { Session } from "@supabase/supabase-js";
 
 // Shared Components
-import { SideBar } from "components/shared";
+import { SideBar } from "components";
 
 /*--------------------*/
 

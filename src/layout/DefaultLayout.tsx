@@ -6,7 +6,7 @@ import type { Session } from "@supabase/supabase-js";
 import { useState } from "react";
 
 // Shared Components
-import { NavBar, Footer } from "../components/shared";
+import { NavBar, Footer } from "components";
 
 /*--------------------*/
 

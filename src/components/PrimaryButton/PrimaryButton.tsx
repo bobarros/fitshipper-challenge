@@ -1,16 +1,8 @@
-// Third Parties
-
 // Styles
 import { Button } from "./PrimaryButtonStyle";
 
-// Next
-
 // Types
 import { FC } from "react";
-
-// Hooks
-
-// Shared Components
 
 /*--------------------*/
 
