@@ -19,7 +19,7 @@ interface IProps {
 
 const CustomCta = () => {
   return (
-    <p className="text-xl mt-4 text-stone-900 dark:text-stone-50">
+    <p className="text-xl mt-4 text-stone-900 dark:text-stone-50 text-center">
       Please,{" "}
       <Link className="underline" to="login">
         login
@@ -35,7 +35,7 @@ const CustomCta = () => {
 const Home: FC<IProps> = ({ session }) => {
   return (
     <div className={`h-full ${session && "grid grid-cols-8"}`}>
-      <SideBar />
+      {session ? <SideBar /> : null}
       <div className="p-6 col-span-7">
         <p className="text-4xl mt-32 max-w-md mx-auto text-stone-900 dark:text-stone-50 text-center ">
           Welcome to the challenge landing page!

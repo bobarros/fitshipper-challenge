@@ -53,6 +53,8 @@ const Addresses: FC<IProps> = () => {
             addresses={addresses}
             setSwitchSection={setSwitchSection}
             setSelectedAddress={setSelectedAddress}
+            setUpdated={setUpdated}
+            updated={updated}
           />
         );
       case "edit":
@@ -65,7 +67,13 @@ const Addresses: FC<IProps> = () => {
           />
         );
       case "create":
-        return <NewAddress setSwitchSection={setSwitchSection} />;
+        return (
+          <NewAddress
+            setSwitchSection={setSwitchSection}
+            setUpdated={setUpdated}
+            updated={updated}
+          />
+        );
     }
   };
 

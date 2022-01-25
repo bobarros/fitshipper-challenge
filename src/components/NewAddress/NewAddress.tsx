@@ -16,14 +16,14 @@ import { PrimaryButton } from "components";
 // Local Types
 interface IProps {
   setSwitchSection: (section: "show") => void;
+  setUpdated: (updated: boolean) => void;
+  updated: boolean;
 }
-
-// Local Preps
 
 /**
  * NewAddress Component
  */
-const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
+const NewAddress: FC<IProps> = ({ setSwitchSection, updated, setUpdated }) => {
   const [loading, setLoading] = useState(false);
   const [freeForm, setFreeForm] = useState(false);
 
@@ -74,6 +74,7 @@ const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
       .then(() => {
         setLoading(false);
         setSwitchSection("show");
+        setUpdated(!updated);
       })
       .catch((res) => {
         console.log("error", res);

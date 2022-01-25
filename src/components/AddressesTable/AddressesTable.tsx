@@ -2,49 +2,89 @@
 
 // Third Parties
 import { useTable, useSortBy, usePagination } from "react-table";
+import axios, { AxiosRequestConfig } from "axios";
 
 // Types
-import type { FC } from "react";
+import { FC, useEffect } from "react";
 
 // Hooks
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 // Component Schema
 import { AddressesColumnSchema } from "./AddressesTableSchemas";
 
 // Shared Components
-import { PrimaryButton } from "components";
+import { PrimaryButton, ConfirmBox } from "components";
 
 /*--------------------*/
 
 // Local Types
+type IRemove = 'inactive' | 'remove' | 'cancel';
 interface IProps {
   addresses: any;
-  setSwitchSection: (section: 'create' | 'edit') => void;
+  setSwitchSection: (section: "create" | "edit") => void;
   setSelectedAddress: (address: any) => void;
+  setUpdated: (updated: boolean) => void;
+  updated: boolean;
 }
 
 /**
  * AddressesTable Component
  */
-const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection, setSelectedAddress }) => {
+const AddressesTable: FC<IProps> = ({
+  addresses,
+  setSwitchSection,
+  setSelectedAddress,
+  setUpdated,
+  updated,
+}) => {
+  const [addressToRemove, setAddressToRemove] = useState<any>(null);
+  const [removeStatus, setRemoveStatus] = useState<IRemove>('inactive');
   const data = useMemo(() => addresses, [addresses]);
   const columns = useMemo(() => AddressesColumnSchema, []);
   const tableInstance = useTable({ columns, data }, useSortBy, usePagination);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    tableInstance;
 
   const handleEditAddress = (address: any) => {
-    setSwitchSection('edit');
+    setSwitchSection("edit");
     setSelectedAddress(address);
-  }
+  };
 
   const openRemoveBox = (address: any) => {
+    setAddressToRemove(address);
+  };
 
-  }
+  useEffect(() => {
+    if (removeStatus === 'remove') {
+      const options: AxiosRequestConfig = {
+        method: "DELETE",
+        url: `https://fsl-candidate-api-vvfym.ondigitalocean.app/v1/address/${addressToRemove.id}`
+      };
+      axios(options)
+        .then(() => {
+          setRemoveStatus('inactive');
+          setAddressToRemove(null);
+          setUpdated(!updated);
+        })
+        .catch((res) => {
+          console.log("error", res);
+          setRemoveStatus('inactive');
+          setAddressToRemove(null);
+        });
+    }
+    if (removeStatus === 'cancel') {
+      setAddressToRemove(null);
+      setRemoveStatus('inactive');
+    }
+  }, [removeStatus, addressToRemove]);
 
   return (
     <div>
-      <div className="w-32 mb-8 inline-block float-right" onClick={() => setSwitchSection('create')}>
+      <div
+        className="w-32 mb-8 inline-block float-right"
+        onClick={() => setSwitchSection("create")}
+      >
         <PrimaryButton>Create +</PrimaryButton>
       </div>
       <table
@@ -79,11 +119,11 @@ const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection, setSelectedAd
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row: any, i: number) => {
+          {rows.map((row: any) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map((cell: any, index: number) => {
+                {row.cells.map((cell: any) => {
                   return (
                     <td
                       className="border border-solid pl-2 pr-16
@@ -96,14 +136,31 @@ const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection, setSelectedAd
                   );
                 })}
                 <td className="border border-solid pl-2 pr-16 border-stone-900 dark:border-stone-50">
-                  <span onClick={() => handleEditAddress(row.original) } className="cursor-pointer">Edit</span> /{" "}
-                  <span onClick={() => openRemoveBox(row.original)} className="cursor-pointer">Remove</span>
+                  <span
+                    onClick={() => handleEditAddress(row.original)}
+                    className="cursor-pointer"
+                  >
+                    Edit
+                  </span>{" "}
+                  /{" "}
+                  <span
+                    onClick={() => openRemoveBox(row.original)}
+                    className="cursor-pointer"
+                  >
+                    Remove
+                  </span>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      {addressToRemove && (
+        <ConfirmBox
+          text={addressToRemove.name}
+          setAction={setRemoveStatus}
+        />
+      )}
     </div>
   );
 };

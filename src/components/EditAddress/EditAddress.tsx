@@ -16,8 +16,8 @@ import { PrimaryButton } from "components";
 // Local Types
 interface IProps {
   setSwitchSection: (section: "show") => void;
-  setUpdated: (updated: boolean) => void;
   address: any;
+  setUpdated: (updated: boolean) => void;
   updated: boolean;
 }
 

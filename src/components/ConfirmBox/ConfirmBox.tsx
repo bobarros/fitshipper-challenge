@@ -7,22 +7,26 @@ import type { FC } from "react";
 /*--------------------*/
 
 // Local Types
-interface IProps {}
+type IRemove = 'inactive' | 'remove' | 'cancel';
+interface IProps {
+  text: string;
+  setAction: (action: IRemove) => void;
+}
 
 /**
  * ConfirmBox Component
  */
-const ConfirmBox: FC<IProps> = () => {
+const ConfirmBox: FC<IProps> = ({ text, setAction }) => {
   return (
     <Wrap>
       <InnerWrap>
         <p className="text-2xl">Confirm</p>
         <div>
-          <p className="text-center">Remove 123 Test Street</p>
+          <p className="text-center">Remove {text}?</p>
         </div>
         <div className="flex justify-between">
-          <button>Cancel</button>
-          <button>Confirm</button>
+          <button onClick={() => setAction('cancel')}>Cancel</button>
+          <button onClick={() => setAction('remove')}>Confirm</button>
         </div>
       </InnerWrap>
       <Background />
