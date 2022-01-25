@@ -4,17 +4,13 @@ import axios from "axios";
 // Types
 import type { FC } from "react";
 import type { AxiosRequestConfig } from "axios";
-import type { Session } from "@supabase/supabase-js";
 
 // Hooks
 import { useState, useEffect } from "react";
 
 // Shared Components
-import { AddressesTable, NewAddress } from "../components";
+import { AddressesTable, NewAddress, EditAddress } from "../components";
 import { SideBar } from "../components/shared";
-
-// Utils
-import { addressesMock } from "../utils/mockServer";
 
 /*--------------------*/
 
@@ -28,40 +24,49 @@ type Sections = "show" | "create" | "edit";
 
 const Addresses: FC<IProps> = () => {
   const [addresses, setAddresses] = useState<any>([]);
+  const [selectedAddress, setSelectedAddress] = useState<any>(null);
   const [switchSections, setSwitchSection] = useState<Sections>("show");
+  const [updated, setUpdated] = useState(false);
 
   // Fetch Data
   useEffect(() => {
-    /*
     const options: AxiosRequestConfig = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      url: 'https://fsl-candidate-api-vvfym.ondigitalocean.app/v1/address?orderBy=id&direction=desc',
+      url: "https://fsl-candidate-api-vvfym.ondigitalocean.app/v1/address?orderBy=id&direction=desc",
     };
-    */
+
     async function fetchData() {
-      /*
       const res = await axios(options);
       setAddresses(res.data);
-      */
-      setAddresses(addressesMock);
     }
     fetchData();
-  }, []);
+  }, [updated]);
 
   const renderTable = () => {
     switch (switchSections) {
       case "show":
-        return <AddressesTable addresses={addresses} setSwitchSection={setSwitchSection}/>;
+        return (
+          <AddressesTable
+            addresses={addresses}
+            setSwitchSection={setSwitchSection}
+            setSelectedAddress={setSelectedAddress}
+          />
+        );
       case "edit":
-        return <div>Under Construction</div>;
+        return (
+          <EditAddress
+            address={selectedAddress}
+            setSwitchSection={setSwitchSection}
+            setUpdated={setUpdated}
+            updated={updated}
+          />
+        );
       case "create":
         return <NewAddress setSwitchSection={setSwitchSection} />;
-      default:
-        return <AddressesTable addresses={addresses} setSwitchSection={setSwitchSection}/>;
     }
   };
 

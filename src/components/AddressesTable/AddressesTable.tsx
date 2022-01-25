@@ -18,18 +18,24 @@ import { PrimaryButton } from "components/shared";
 // Local Types
 interface IProps {
   addresses: any;
-  setSwitchSection: (section: 'create') => void;
+  setSwitchSection: (section: 'create' | 'edit') => void;
+  setSelectedAddress: (address: any) => void;
 }
 
 /**
  * AddressesTable Component
  */
-const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection }) => {
+const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection, setSelectedAddress }) => {
   const data = useMemo(() => addresses, [addresses]);
   const columns = useMemo(() => AddressesColumnSchema, []);
   const tableInstance = useTable({ columns, data }, useSortBy, usePagination);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+
+  const handleEditAddress = (address: any) => {
+    setSwitchSection('edit');
+    setSelectedAddress(address);
+  }
+
   return (
     <div>
       <div className="w-32 mb-8 inline-block float-right" onClick={() => setSwitchSection('create')}>
@@ -84,7 +90,7 @@ const AddressesTable: FC<IProps> = ({ addresses, setSwitchSection }) => {
                   );
                 })}
                 <td className="border border-solid pl-2 pr-16 border-stone-900 dark:border-stone-50">
-                  <span className="cursor-pointer">Edit</span> /{" "}
+                  <span onClick={() => handleEditAddress(row.original) } className="cursor-pointer">Edit</span> /{" "}
                   <span className="cursor-pointer">Remove</span>
                 </td>
               </tr>
