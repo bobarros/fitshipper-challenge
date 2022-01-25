@@ -112,7 +112,7 @@ const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
             {...register("message")}
           />
           <div className="mt-4">
-            <PrimaryButton type="submit" filled>
+            <PrimaryButton type="submit">
               Transform
             </PrimaryButton>
           </div>
