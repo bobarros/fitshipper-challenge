@@ -77,7 +77,7 @@ const AddressesTable: FC<IProps> = ({
       setAddressToRemove(null);
       setRemoveStatus('inactive');
     }
-  }, [removeStatus, addressToRemove]);
+  }, [removeStatus, addressToRemove, updated, setUpdated]);
 
   return (
     <div>
