@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 // Types
 import type { FC } from "react";
-import type { Session } from "@supabase/supabase-js";
 
 // Shared Components
 import { SideBar } from "components";
@@ -12,7 +11,7 @@ import { SideBar } from "components";
 
 // Local Types
 interface IProps {
-  session?: Session;
+  logged: boolean;
 }
 
 // Local Prep
@@ -32,16 +31,16 @@ const CustomCta = () => {
 /**
  * Home Component
  */
-const Home: FC<IProps> = ({ session }) => {
+const Home: FC<IProps> = ({ logged }) => {
   return (
-    <div className={`h-full ${session && "grid grid-cols-8"}`}>
-      {session ? <SideBar /> : null}
+    <div className={`h-full ${logged && "grid grid-cols-8"}`}>
+      {logged && <SideBar />}
       <div className="p-6 col-span-7">
         <p className="text-4xl mt-32 max-w-md mx-auto text-stone-900 dark:text-stone-50 text-center ">
           Welcome to the challenge landing page!
         </p>
       </div>
-      {session ? null : <CustomCta />}
+      {!logged && <CustomCta />}
     </div>
   );
 };

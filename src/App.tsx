@@ -26,12 +26,14 @@ interface IProps {}
  */
 const App: FC<IProps> = () => {
   const [session, setSession] = useState<any>(null);
+  const [logged, setLogged] = useState<boolean>(true);
 
   // Check Authentication
   useEffect(() => {
     setSession(supabase.auth.session());
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      setLogged(session !== null);
     });
   }, []);
 
@@ -44,7 +46,7 @@ const App: FC<IProps> = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={CustomRender(<Login />)} />
-          <Route path="/" element={CustomRender(<Home />)} />
+          <Route path="/" element={CustomRender(<Home logged={logged} />)} />
           <Route path="/signup" element={CustomRender(<CreateUser />)} />
           <Route path="*" element={<div>404 - Not Found</div>} />
         </Routes>
@@ -56,7 +58,7 @@ const App: FC<IProps> = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={CustomRender(<Login />)} />
-        <Route path="/" element={CustomRender(<Home session={session} />)} />
+        <Route path="/" element={CustomRender(<Home logged={logged} />)} />
         <Route path="/dashboard" element={CustomRender(<LoggedArea />)} />
         <Route path="/settings" element={CustomRender(<Settings />)} />
         <Route path="/addresses" element={CustomRender(<Addresses />)} />
