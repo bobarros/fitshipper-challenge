@@ -26,7 +26,7 @@ interface IProps {}
  */
 const App: FC<IProps> = () => {
   const [session, setSession] = useState<any>(null);
-  const [logged, setLogged] = useState<boolean>(true);
+  const [logged, setLogged] = useState<boolean>(false);
 
   // Check Authentication
   useEffect(() => {
