@@ -32,6 +32,7 @@ const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
     formState: { errors },
     register,
     setValue,
+    getValues,
   } = useForm();
 
   const getFreeForm = (data: any) => {
@@ -44,6 +45,23 @@ const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
     setValue("zip", getLines[5]);
     setFreeForm(false);
   };
+
+  const switchFreeForm = () => {
+    if(!freeForm) {
+      // I get the values but if they are empty, I set a placeholder for required lines
+      const AllValues = [
+        getValues("name").length > 0 ? getValues("name") : "Name here",
+        getValues("address1").length > 0 ? getValues("address1") : "Address here",
+        getValues("address2").length > 0 ? getValues("address2") : "\n",
+        getValues("city").length > 0 ? getValues("city") : "City here",
+        getValues("state").length > 0 ? getValues("state") : "State here",
+        getValues("zip").length > 0 ? getValues("zip") : "Zip here",
+      ]
+      let stringOfValues = AllValues.join(" \n");
+      setValue("message", stringOfValues);
+    }
+    setFreeForm(!freeForm);
+  }
 
   const onSubmit = (data: any) => {
     setLoading(true);
@@ -101,14 +119,14 @@ const NewAddress: FC<IProps> = ({ setSwitchSection }) => {
       <h2 className="text-4xl max-w-md text-stone-900 dark:text-stone-50 mb-8">
         Create New User
       </h2>
-      <div className="w-48 mb-4" onClick={() => setFreeForm(!freeForm)}>
+      <div className="w-48 mb-4" onClick={switchFreeForm}>
         <PrimaryButton type="button">Switch Free Form</PrimaryButton>
       </div>
       {freeForm ? (
         <form onSubmit={handleSubmit(getFreeForm)}>
           <textarea
-            className="w-full h-48 p-4 border-2 border-stone-300 dark:border-stone-500 resize-none"
-            placeholder="Please, use five lines for each field: Name, Address, Adress 2, City, State, Zip"
+            className="w-full h-64 p-4 border-2 border-stone-300 dark:border-stone-500 resize-none"
+            placeholder="Please, use five lines for each field. &#10;Use a blank line if you need to skip Address 2.&#10;.&#10;Like so: &#10;Name, &#10;Address, &#10;Address 2, &#10;City, &#10;State, &#10;Zip"
             {...register("message")}
           />
           <div className="mt-4">
